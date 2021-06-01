@@ -65,25 +65,9 @@ export class UserController {
     }
 
     @Get('user')
-    async user(@Req() request: Request) {
-        try {
-            const cookie = request.cookies['jwt'];
-
-            const data = await this.jwtService.verifyAsync(cookie);
-
-            if (!data) {
-                throw new UnauthorizedException();
-            }
-
-            const user = await this.userService.findOne({id: data['id']});
-
-            const {password, ...result} = user;
-
-            return result;
-        } catch (e) {
-            throw new UnauthorizedException();
-        }
-    }
+    findAll(): Promise<User[]> {
+        return this.userService.findAll();
+      }
 
     @Get('login/profile')
     async profile(
