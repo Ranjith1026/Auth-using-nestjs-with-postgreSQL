@@ -27,5 +27,9 @@ export class UserService {
     async delete(id): Promise<DeleteResult> {
         return this.userRepository.delete(id);
     }
+    
+    async findAll(): Promise<User[]> {
+        return this.userRepository.find();
+      }
    
 }
